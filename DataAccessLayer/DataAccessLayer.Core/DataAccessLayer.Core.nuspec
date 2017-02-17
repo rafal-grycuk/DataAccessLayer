@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DataAccessLayer.Core</id>
-    <version>1.0.0</version>
+    <version>1.0.</version>
     <authors>Rafal Grycuk</authors>
     <owners>Rafal Grycuk</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,10 +11,14 @@
     <copyright>By Rafal Grycuk</copyright>
     <tags>Generic Repository Unit of Work UoW</tags>
     <dependencies>
-      <dependency id="Microsoft.EntityFrameworkCore" version="1.1.0" />
+      <dependencies>
+        <dependency id="Microsoft.EntityFrameworkCore" version="1.1.0" />
+        <dependency id="System.Collections.NonGeneric" version="4.3.0" />
+        <dependency id="System.Data.SqlClient" version="4.3.0" />
+      </dependencies>
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\netstandard1.6\DataAccessLayer.Core.dll" target="lib"></file>
+    <file src="bin\Release\netstandard1.6\DAL.dll" target="lib\netstandard1.6"></file>
   </files>
 </package>

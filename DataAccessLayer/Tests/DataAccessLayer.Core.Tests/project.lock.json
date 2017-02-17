@@ -2570,7 +2570,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "DataAccessLayer.Core/1.0.0": {
+      "DataAccessLayer.Core/1.0.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -7712,7 +7712,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "DataAccessLayer.Core/1.0.0": {
+    "DataAccessLayer.Core/1.0.1": {
       "type": "project",
       "path": "../../DataAccessLayer.Core/project.json",
       "msbuildProject": "../../DataAccessLayer.Core/DataAccessLayer.Core.xproj"
