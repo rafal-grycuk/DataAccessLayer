@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DataAccessLayer.Repositories.Interfaces
+namespace DataAccessLayer.Net.Repositories.Interfaces
 {
     public interface IModelEditable<T>
     {

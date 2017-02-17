@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DataAccessLayer.Exceptions
+namespace DataAccessLayer.Net.Exceptions
 {
     public class ForeignKeyViolationException : Exception
     {

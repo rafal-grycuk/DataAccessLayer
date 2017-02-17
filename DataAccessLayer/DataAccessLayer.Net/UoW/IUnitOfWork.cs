@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using DataAccessLayer.Repositories.Interfaces;
+using DataAccessLayer.Net.Repositories.Interfaces;
 
-namespace DataAccessLayer.UoW
+namespace DataAccessLayer.Net.UoW
 {
     public interface IUnitOfWork
     {

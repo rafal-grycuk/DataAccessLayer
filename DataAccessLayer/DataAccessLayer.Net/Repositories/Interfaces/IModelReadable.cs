@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace DataAccessLayer.Repositories.Interfaces
+namespace DataAccessLayer.Net.Repositories.Interfaces
 {
     public interface IModelReadable<T>
     {

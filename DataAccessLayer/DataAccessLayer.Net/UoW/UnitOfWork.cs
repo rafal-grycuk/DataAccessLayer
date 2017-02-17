@@ -5,11 +5,11 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Text;
-using DataAccessLayer.Exceptions;
-using DataAccessLayer.Repositories.Concrete;
-using DataAccessLayer.Repositories.Interfaces;
+using DataAccessLayer.Net.Exceptions;
+using DataAccessLayer.Net.Repositories.Concrete;
+using DataAccessLayer.Net.Repositories.Interfaces;
 
-namespace DataAccessLayer.UoW
+namespace DataAccessLayer.Net.UoW
 {
     public class UnitOfWork : IUnitOfWork
     {

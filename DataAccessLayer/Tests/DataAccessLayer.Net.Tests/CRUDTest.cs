@@ -1,14 +1,15 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace DataAccessLayer.Tests
+using DataAccessLayer.Net.UoW;
+namespace DataAccessLayer.Net.Tests
 {
     [TestClass]
-    public class CRUDTests
+    public class CRUDTest
     {
         [TestMethod]
         public void TestMethod1()
         {
+          
         }
     }
 }
