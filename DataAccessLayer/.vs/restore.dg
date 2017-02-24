@@ -1,3 +1,6 @@
-#:B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core\DataAccessLayer.Core.xproj
+#:B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.EntityFramework\DataAccessLayer.Core.EntityFramework.xproj
+B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.EntityFramework\DataAccessLayer.Core.EntityFramework.xproj|B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.Interfaces\DataAccessLayer.Core.Interfaces.xproj
 #:B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\Tests\DataAccessLayer.Core.Tests\DataAccessLayer.Core.Tests.xproj
-B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\Tests\DataAccessLayer.Core.Tests\DataAccessLayer.Core.Tests.xproj|B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core\DataAccessLayer.Core.xproj
+B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\Tests\DataAccessLayer.Core.Tests\DataAccessLayer.Core.Tests.xproj|B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.EntityFramework\DataAccessLayer.Core.EntityFramework.xproj
+B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\Tests\DataAccessLayer.Core.Tests\DataAccessLayer.Core.Tests.xproj|B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.Interfaces\DataAccessLayer.Core.Interfaces.xproj
+B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.EntityFramework\DataAccessLayer.Core.EntityFramework.xproj|B:\Projects\GITHUB\DataAccessLayer\DataAccessLayer\DataAccessLayer.Core.Interfaces\DataAccessLayer.Core.Interfaces.xproj

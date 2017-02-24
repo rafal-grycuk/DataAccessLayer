@@ -1,0 +1,17 @@
+{
+  "title": "DataAccessLayer.Core.Interfaces",
+  "copyright": "Rafal Grycuk",
+  "description": "Data Access Layer Core interfaces for Core project",
+  "version": "1.0.2",
+
+  "dependencies": {
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "NETStandard.Library": "1.6.1"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  }
+}

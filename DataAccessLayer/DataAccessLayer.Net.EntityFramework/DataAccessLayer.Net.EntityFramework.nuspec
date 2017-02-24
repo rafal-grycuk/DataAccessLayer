@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>DataAccessLayer.Net.EntityFramework</id>
+    <version>1.0.2</version>
+    <authors>Rafal Grycuk</authors>
+    <owners>Rafal Grycuk</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Data Access Layer provides concreate entity framework implemenataion of Generic Repository and Unit of Work for your .NET application.</description>
+    <releaseNotes>Project splited into two projects abstract and concreate implementation. </releaseNotes>
+    <copyright>By Rafal Grycuk</copyright>
+    <tags>Generic Repository Unit of Work UoW EF EntityFramework</tags>
+    <dependencies>
+      <dependency id="EntityFramework" version="6.1.3" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\Release\DataAccessLayer.Net.EntityFramework.dll" target="lib"></file>
+    <file src="bin\Release\DataAccessLayer.Net.Interfaces.dll" target="lib"></file>
+  </files>
+</package>
