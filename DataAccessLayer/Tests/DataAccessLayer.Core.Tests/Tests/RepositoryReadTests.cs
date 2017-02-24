@@ -23,14 +23,14 @@ namespace DataAccessLayer.Core.Tests.Tests
         }
 
         [Fact]
-        public void GetByIdTest()
+        public void GetClientByIdTest()
         {
             var client= clientRepo.Get(1, false, c => c.Orders.Select(x => x.Products.Select(pr => pr.Producer)));
             Assert.True(client != null);
         }
 
         [Fact]
-        public void GetByPredicateTest()
+        public void GeClienttByPredicateTest()
         {
 
             var client = clientRepo.Get(x => x.Id == 1, false,
@@ -39,13 +39,22 @@ namespace DataAccessLayer.Core.Tests.Tests
         }
 
         [Fact]
-        public void GetRangeTest()
+        public void GetClientRangeTest()
         {
 
             var clients = clientRepo.GetRange(null, false, null,
                 c => c.Orders.Select(x => x.Products.Select(pr => pr.Producer)));
-            Assert.True(clients != null && clients.Any() && clients.FirstOrDefault().Orders !=null);
 
+            var clients2 = clientRepo.GetRange(null, false, null, c => c.Orders.Select(x => x.Products));
+            Assert.True(clients != null && clients.Any() && clients.FirstOrDefault().Orders != null);
+            Assert.True(clients2 != null && clients2.Any() && clients2.FirstOrDefault().Orders != null);
         }
+
+        [Fact]
+        public void GetProductRangeTest()
+        {
+            var products = productRepo.GetRange(null, false, null, p => p.Order);
+        }
+
     }
 }

@@ -105,7 +105,11 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 {
                     dynamic body = inc.Body;
                     string includeString = GetPropertyMap(body);
-                    query = (IQueryable<T>)query.Include(includeString);
+                    includeString = includeString.StartsWith(".") ? includeString.Remove(0, 1):includeString;
+                    includeString = includeString.EndsWith(".") ? includeString.Remove(includeString.Length-1, 1) : includeString;
+
+                    if (string.IsNullOrWhiteSpace(includeString) == false)
+                        query = (IQueryable<T>)query.Include(includeString);
                 }
             }
 
@@ -133,7 +137,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 {
                     dynamic body = item.Body;
                     string includeString = GetPropertyMap(body);
-                    query = (IQueryable<T>) query.Include(includeString);
+                    query = (IQueryable<T>)query.Include(includeString);
                 }
             }
             return query.Where(lambda).SingleOrDefault();
@@ -180,6 +184,10 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                     }
                 }
 
+            }
+            else if (Helpers.IsPropertyExist(body, "Member"))
+            {
+                includeString += body.Member.Name;
             }
             return includeString;
         }
