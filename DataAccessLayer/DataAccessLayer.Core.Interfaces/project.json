@@ -1,11 +1,11 @@
 {
   "title": "DataAccessLayer.Core.Interfaces",
   "description": "Data Access Layer Core interfaces for Core project",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "copyright": "By Rafal Grycuk",
   "authors": [ "Rafal Grycuk" ],
   "packOptions": {
-    "releaseNotes": "Project splited into two projects abstract and concreate implementation.",
+    "releaseNotes": "Implemented AddOrUpdateMethod",
     "tags": [ "Generic Repository", "Unit of Work", "UoW" ]
 
   },

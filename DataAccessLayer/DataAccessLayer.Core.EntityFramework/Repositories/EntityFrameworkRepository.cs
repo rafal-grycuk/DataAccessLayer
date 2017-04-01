@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using DataAccessLayer.Core.EntityFramework.Utilities;
 using DataAccessLayer.Core.Interfaces.Infrastructure;
 using DataAccessLayer.Core.Interfaces.Repositories;
@@ -30,6 +31,24 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             _dbSet.AddRange(entities);
         }
 
+        public void AddOrUpdate(Expression<Func<T, bool>> predicate, T entity)
+        {
+            var filteredEntity = _context.Set<T>().FirstOrDefaultAsync(predicate).Result;
+            if (filteredEntity == null)
+                _context.Entry(entity).State = EntityState.Added;
+            else
+            {
+                var primaryKeyNames = _context.Model.FindEntityType(typeof(T)).FindPrimaryKey().Properties.Select(x => x.Name).ToList();
+                _context.Entry(filteredEntity).State = EntityState.Detached;
+                primaryKeyNames.ForEach(pk =>
+                {
+                    var primaryKeyValue = filteredEntity.GetType().GetProperty(pk).GetValue(filteredEntity, null);
+
+                    entity.GetType().GetProperty(pk).SetValue(entity, primaryKeyValue);
+                });
+                _context.Entry(entity).State = EntityState.Modified;
+            }
+        }
         public int Count(Expression<Func<T, bool>> predicate = null)
         {
             return predicate == null ? _dbSet.Count() : _dbSet.Count(predicate);
@@ -105,8 +124,8 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 {
                     dynamic body = inc.Body;
                     string includeString = GetPropertyMap(body);
-                    includeString = includeString.StartsWith(".") ? includeString.Remove(0, 1):includeString;
-                    includeString = includeString.EndsWith(".") ? includeString.Remove(includeString.Length-1, 1) : includeString;
+                    includeString = includeString.StartsWith(".") ? includeString.Remove(0, 1) : includeString;
+                    includeString = includeString.EndsWith(".") ? includeString.Remove(includeString.Length - 1, 1) : includeString;
 
                     if (string.IsNullOrWhiteSpace(includeString) == false)
                         query = (IQueryable<T>)query.Include(includeString);
