@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>DataAccessLayer.Net.Interfaces</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <authors>Rafal Grycuk</authors>
     <owners>Rafal Grycuk</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Data Access Layer provides abstract interfaces of Generic Repository and Unit of Work for your .NET application.</description>
-    <releaseNotes>Project splited into two projects abstract and concreate implementation. </releaseNotes>
+    <releaseNotes>Modified Row in UoW.Save() method added</releaseNotes>
     <copyright>By Rafal Grycuk</copyright>
     <tags>Generic Repository Unit of Work UoW</tags>
     <dependencies>

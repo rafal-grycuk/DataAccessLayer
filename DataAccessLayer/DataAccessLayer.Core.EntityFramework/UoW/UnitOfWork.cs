@@ -31,11 +31,11 @@ namespace DataAccessLayer.Core.EntityFramework.UoW
             GC.SuppressFinalize(this);
         }
         
-        public void Save()
+        public int Save()
         {
             try
             {
-                _context.SaveChanges();
+                return _context.SaveChanges();
             }
             catch (DbUpdateException e)
             {

@@ -2,12 +2,12 @@
   "title": "DataAccessLayer.Core.EntityFramework",
   "copyright": "By Rafal Grycuk",
   "description": "Data Access Layer provides concreate entity framework implemenataion of Generic Repository and Unit of Work for your .NET CORE application.",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "authors": [ "Rafal Grycuk" ],
   "packOptions": {
-    "releaseNotes": "Implemented AddOrUpdateMethod",
+    "releaseNotes": "Modified Row in UoW.Save() method added",
     "tags": [ "Generic Repository", "Unit of Work", "UoW", "EF", "EntityFramework" ]
-         
+
   },
   "dependencies": {
     "DataAccessLayer.Core.Interfaces": "1.0.4",

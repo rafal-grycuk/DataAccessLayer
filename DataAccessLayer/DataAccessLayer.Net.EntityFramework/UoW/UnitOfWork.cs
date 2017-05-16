@@ -24,18 +24,18 @@ namespace DataAccessLayer.Net.EntityFramework.UoW
             _context = context;
             _repositories = new Hashtable();
         }
-        
+
         public void Dispose()
         {
             Dispose();
             GC.SuppressFinalize(this);
         }
-        
-        public void Save()
+
+        public int Save()
         {
             try
             {
-                _context.SaveChanges();
+                return _context.SaveChanges();
             }
             catch (DbUpdateException e)
             {
@@ -88,7 +88,7 @@ namespace DataAccessLayer.Net.EntityFramework.UoW
 
         public IRepository<T> Repository<T>() where T : class
         {
-           var type = typeof(T).Name;
+            var type = typeof(T).Name;
             if (!_repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(EntityFrameworkRepository<>);

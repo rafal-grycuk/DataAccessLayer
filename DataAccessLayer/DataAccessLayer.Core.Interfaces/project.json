@@ -1,11 +1,11 @@
 {
   "title": "DataAccessLayer.Core.Interfaces",
   "description": "Data Access Layer Core interfaces for Core project",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "copyright": "By Rafal Grycuk",
   "authors": [ "Rafal Grycuk" ],
   "packOptions": {
-    "releaseNotes": "Implemented AddOrUpdateMethod",
+    "releaseNotes": "Modified Row in UoW.Save() method added",
     "tags": [ "Generic Repository", "Unit of Work", "UoW" ]
 
   },
