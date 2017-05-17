@@ -1884,7 +1884,7 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
-      "DataAccessLayer.Core.Interfaces/1.0.3": {
+      "DataAccessLayer.Core.Interfaces/1.0.5": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -6062,7 +6062,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "DataAccessLayer.Core.Interfaces/1.0.3": {
+    "DataAccessLayer.Core.Interfaces/1.0.5": {
       "type": "project",
       "path": "../DataAccessLayer.Core.Interfaces/project.json",
       "msbuildProject": "../DataAccessLayer.Core.Interfaces/DataAccessLayer.Core.Interfaces.xproj"
@@ -6070,7 +6070,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "DataAccessLayer.Core.Interfaces >= 1.0.4",
+      "DataAccessLayer.Core.Interfaces >= 1.0.5",
       "Microsoft.CSharp >= 4.3.0",
       "Microsoft.EntityFrameworkCore >= 1.1.0",
       "NETStandard.Library >= 1.6.1",

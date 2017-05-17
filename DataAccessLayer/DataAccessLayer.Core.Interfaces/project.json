@@ -1,7 +1,7 @@
 {
   "title": "DataAccessLayer.Core.Interfaces",
   "description": "Data Access Layer Core interfaces for Core project",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "copyright": "By Rafal Grycuk",
   "authors": [ "Rafal Grycuk" ],
   "packOptions": {

@@ -2,7 +2,7 @@
   "title": "DataAccessLayer.Core.EntityFramework",
   "copyright": "By Rafal Grycuk",
   "description": "Data Access Layer provides concreate entity framework implemenataion of Generic Repository and Unit of Work for your .NET CORE application.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "authors": [ "Rafal Grycuk" ],
   "packOptions": {
     "releaseNotes": "Modified Row in UoW.Save() method added",
@@ -10,7 +10,7 @@
 
   },
   "dependencies": {
-    "DataAccessLayer.Core.Interfaces": "1.0.4",
+    "DataAccessLayer.Core.Interfaces": "1.0.5",
     "Microsoft.CSharp": "4.3.0",
     "Microsoft.EntityFrameworkCore": "1.1.0",
     "NETStandard.Library": "1.6.1",
