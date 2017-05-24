@@ -3190,11 +3190,11 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "DataAccessLayer.Core.EntityFramework/1.0.5": {
+      "DataAccessLayer.Core.EntityFramework/1.0.7": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "DataAccessLayer.Core.Interfaces": "1.0.5",
+          "DataAccessLayer.Core.Interfaces": "1.0.7",
           "Microsoft.CSharp": "4.3.0",
           "Microsoft.EntityFrameworkCore": "1.1.0",
           "NETStandard.Library": "1.6.1",
@@ -3209,7 +3209,7 @@
           "netstandard1.6/DataAccessLayer.Core.EntityFramework.dll": {}
         }
       },
-      "DataAccessLayer.Core.Interfaces/1.0.5": {
+      "DataAccessLayer.Core.Interfaces/1.0.7": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -6493,11 +6493,11 @@
           "lib/netstandard1.1/xunit.runner.utility.dotnet.dll": {}
         }
       },
-      "DataAccessLayer.Core.EntityFramework/1.0.5": {
+      "DataAccessLayer.Core.EntityFramework/1.0.7": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
-          "DataAccessLayer.Core.Interfaces": "1.0.5",
+          "DataAccessLayer.Core.Interfaces": "1.0.7",
           "Microsoft.CSharp": "4.3.0",
           "Microsoft.EntityFrameworkCore": "1.1.0",
           "NETStandard.Library": "1.6.1",
@@ -6512,7 +6512,7 @@
           "netstandard1.6/DataAccessLayer.Core.EntityFramework.dll": {}
         }
       },
-      "DataAccessLayer.Core.Interfaces/1.0.5": {
+      "DataAccessLayer.Core.Interfaces/1.0.7": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -12956,12 +12956,12 @@
         "xunit.runner.utility.nuspec"
       ]
     },
-    "DataAccessLayer.Core.EntityFramework/1.0.5": {
+    "DataAccessLayer.Core.EntityFramework/1.0.7": {
       "type": "project",
       "path": "../../DataAccessLayer.Core.EntityFramework/project.json",
       "msbuildProject": "../../DataAccessLayer.Core.EntityFramework/DataAccessLayer.Core.EntityFramework.xproj"
     },
-    "DataAccessLayer.Core.Interfaces/1.0.5": {
+    "DataAccessLayer.Core.Interfaces/1.0.7": {
       "type": "project",
       "path": "../../DataAccessLayer.Core.Interfaces/project.json",
       "msbuildProject": "../../DataAccessLayer.Core.Interfaces/DataAccessLayer.Core.Interfaces.xproj"
