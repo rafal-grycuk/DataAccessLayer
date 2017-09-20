@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Data Access Layer Core interfaces for Core project</Description>
+    <Copyright>By Rafal Grycuk</Copyright>
+    <AssemblyTitle>DataAccessLayer.Core.Interfaces</AssemblyTitle>
+    <VersionPrefix>1.0.7</VersionPrefix>
+    <Authors>Rafal Grycuk</Authors>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <AssemblyName>DataAccessLayer.Core.Interfaces</AssemblyName>
+    <PackageId>DataAccessLayer.Core.Interfaces</PackageId>
+    <PackageTags>Generic Repository;Unit of Work;UoW</PackageTags>
+    <PackageReleaseNotes>Count method and skip and take added</PackageReleaseNotes>
+    <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
+    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Version>1.0.8</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+  </ItemGroup>
+
+</Project>

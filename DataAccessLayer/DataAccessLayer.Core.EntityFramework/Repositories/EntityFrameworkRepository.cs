@@ -111,7 +111,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             return entities;
         }
 
-        private static IEnumerable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query)
+        private static IEnumerable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query, int? skip = null, int? take = null)
         {
             if (filterPredicate != null)
             {
@@ -134,7 +134,13 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
 
             try
             {
-                return orderbyPredicate?.Invoke(query).ToList() ?? query.ToList();
+                var invoked = orderbyPredicate != null ? orderbyPredicate.Invoke(query) : query;
+                IQueryable<T> result = invoked;
+                if (skip.HasValue)
+                    result = result.Skip(skip.Value);
+                if (take.HasValue)
+                    result = result.Take(take.Value);
+                return result.ToList();
             }
             catch (Exception)
             {
@@ -211,10 +217,10 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             return includeString;
         }
 
-        public IEnumerable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, params Expression<Func<T, object>>[] tablePredicate)
+        public IEnumerable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
         {
             IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking();
-            return GetRangePrivate(filterPredicate, orderByPredicate, tablePredicate, query);
+            return GetRangePrivate(filterPredicate, orderByPredicate, tablePredicate, query, skip, take);
         }
 
     }

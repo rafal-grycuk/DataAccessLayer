@@ -1,19 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3C0F9EAF-AF06-49B5-8088-3A153F0E6EE1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20208AA4-7ADE-4114-BD6D-55269EA79E90}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.Net.Tests", "Tests\DataAccessLayer.Net.Tests\DataAccessLayer.Net.Tests.csproj", "{69011BCB-3639-4C3E-8653-FB022DD0D88A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.Core.Tests", "Tests\DataAccessLayer.Core.Tests\DataAccessLayer.Core.Tests.csproj", "{AE295C5F-4CA9-44DE-A4C4-715A4F49DEDE}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DataAccessLayer.Core.Tests", "Tests\DataAccessLayer.Core.Tests\DataAccessLayer.Core.Tests.xproj", "{AE295C5F-4CA9-44DE-A4C4-715A4F49DEDE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.Core.Interfaces", "DataAccessLayer.Core.Interfaces\DataAccessLayer.Core.Interfaces.csproj", "{082D3BEE-1524-476E-838B-119DA19EFB20}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DataAccessLayer.Core.Interfaces", "DataAccessLayer.Core.Interfaces\DataAccessLayer.Core.Interfaces.xproj", "{082D3BEE-1524-476E-838B-119DA19EFB20}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer.Core.EntityFramework", "DataAccessLayer.Core.EntityFramework\DataAccessLayer.Core.EntityFramework.csproj", "{17CFED7B-DEC4-4F37-BA1A-0382BDC5FFFC}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DataAccessLayer.Core.EntityFramework", "DataAccessLayer.Core.EntityFramework\DataAccessLayer.Core.EntityFramework.xproj", "{17CFED7B-DEC4-4F37-BA1A-0382BDC5FFFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{20208AA4-7ADE-4114-BD6D-55269EA79E90}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.Net.Interfaces", "DataAccessLayer.Net.Interfaces\DataAccessLayer.Net.Interfaces.csproj", "{A979499A-B4A3-4A45-B5A8-672165E3AE14}"
 EndProject
@@ -56,8 +59,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{69011BCB-3639-4C3E-8653-FB022DD0D88A} = {3C0F9EAF-AF06-49B5-8088-3A153F0E6EE1}
 		{AE295C5F-4CA9-44DE-A4C4-715A4F49DEDE} = {3C0F9EAF-AF06-49B5-8088-3A153F0E6EE1}
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {91BFF458-68FF-4038-8094-E0A6A0AD1FF9}
 	EndGlobalSection
 EndGlobal

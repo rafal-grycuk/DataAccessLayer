@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>DataAccessLayer.Net.EntityFramework</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <authors>Rafal Grycuk</authors>
     <owners>Rafal Grycuk</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Data Access Layer provides concreate entity framework implemenataion of Generic Repository and Unit of Work for your .NET application.</description>
-    <releaseNotes>Modified Row in UoW.Save() method added</releaseNotes>
+    <releaseNotes>Count skip take added</releaseNotes>
     <copyright>By Rafal Grycuk</copyright>
     <tags>Generic Repository Unit of Work UoW EF EntityFramework</tags>
     <dependencies>
