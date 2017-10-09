@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,8 @@ namespace DataAccessLayer.Core.Interfaces.Repositories
 
         bool DeleteRange(IEnumerable<T> entities);
 
+        bool DeleteAll();
+
         T Add(T entity);
 
         void AddOrUpdate(Expression<Func<T, bool>> predicate, T entity);
@@ -19,6 +22,6 @@ namespace DataAccessLayer.Core.Interfaces.Repositories
 
         T Update(T entity);
 
-        IEnumerable<T> UpdateRange(IEnumerable<T> entities);
+        IQueryable<T> UpdateRange(IEnumerable<T> entities);
     }
 }

@@ -8,6 +8,8 @@ namespace DataAccessLayer.Net.Interfaces.Repositories
 
         bool DeleteRange(IEnumerable<T> entities);
 
+        bool DeleteAll();
+
         T Add(T entity);
 
         void AddRange(IEnumerable<T> entities);

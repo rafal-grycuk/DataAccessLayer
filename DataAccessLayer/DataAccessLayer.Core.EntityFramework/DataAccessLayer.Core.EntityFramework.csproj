@@ -10,13 +10,13 @@
     <AssemblyName>DataAccessLayer.Core.EntityFramework</AssemblyName>
     <PackageId>DataAccessLayer.Core.EntityFramework</PackageId>
     <PackageTags>Generic Repository;Unit of Work;UoW;EF;EntityFramework</PackageTags>
-    <PackageReleaseNotes>Count metod skip and take added.</PackageReleaseNotes>
+    <PackageReleaseNotes>DeleteAll added</PackageReleaseNotes>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>1.0.8</Version>
+    <Version>1.0.9</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -50,7 +50,11 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
             return true;
 
         }
-
+        public bool DeleteAll()
+        {
+            _context.Set<T>().RemoveRange(_context.Set<T>());
+            return true;
+        }
         public bool DeleteRange(IEnumerable<T> entities)
         {
             try

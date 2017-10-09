@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>DataAccessLayer.Net.EntityFramework</id>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
     <authors>Rafal Grycuk</authors>
     <owners>Rafal Grycuk</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Data Access Layer provides concreate entity framework implemenataion of Generic Repository and Unit of Work for your .NET application.</description>
-    <releaseNotes>Count skip take added</releaseNotes>
+    <releaseNotes>DeleteAll added</releaseNotes>
     <copyright>By Rafal Grycuk</copyright>
     <tags>Generic Repository Unit of Work UoW EF EntityFramework</tags>
     <dependencies>

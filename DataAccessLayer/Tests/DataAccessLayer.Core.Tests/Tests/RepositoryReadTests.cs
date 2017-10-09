@@ -42,10 +42,9 @@ namespace DataAccessLayer.Core.Tests.Tests
         public void GetClientRangeTest()
         {
 
-            var clients = clientRepo.GetRange(null, false, null,
-                c => c.Orders.Select(x => x.Products.Select(pr => pr.Producer)));
+            var clients = clientRepo.GetRange(enableTracking: false, tablePredicate: c => c.Orders.Select(x => x.Products.Select(pr => pr.Producer)));
 
-            var clients2 = clientRepo.GetRange(null, false, null, c => c.Orders.Select(x => x.Products));
+            var clients2 = clientRepo.GetRange(enableTracking: false, tablePredicate: c => c.Orders.Select(x => x.Products));
             Assert.True(clients != null && clients.Any() && clients.FirstOrDefault().Orders != null);
             Assert.True(clients2 != null && clients2.Any() && clients2.FirstOrDefault().Orders != null);
         }
@@ -53,7 +52,8 @@ namespace DataAccessLayer.Core.Tests.Tests
         [Fact]
         public void GetProductRangeTest()
         {
-            var products = productRepo.GetRange(null, false, null, p => p.Order);
+            var products = productRepo.GetRange(enableTracking: false, tablePredicate: p => p.Order);
+          
         }
 
     }
