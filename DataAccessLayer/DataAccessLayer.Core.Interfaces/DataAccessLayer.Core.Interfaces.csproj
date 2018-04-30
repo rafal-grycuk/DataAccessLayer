@@ -10,13 +10,14 @@
     <AssemblyName>DataAccessLayer.Core.Interfaces</AssemblyName>
     <PackageId>DataAccessLayer.Core.Interfaces</PackageId>
     <PackageTags>Generic Repository;Unit of Work;UoW</PackageTags>
-    <PackageReleaseNotes>DeleteAll added</PackageReleaseNotes>
+    <PackageReleaseNotes>Referencing prop include added</PackageReleaseNotes>
     <NetStandardImplicitPackageVersion>1.6.1</NetStandardImplicitPackageVersion>
     <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>1.0.9</Version>
+    <Version>1.1.0</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
