@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using DataAccessLayer.Core.EntityFramework.Utilities;
-using DataAccessLayer.Core.Interfaces.Infrastructure;
 using DataAccessLayer.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +16,11 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
 
         public EntityFrameworkRepository(DbContext context)
         {
-            this._context = context;
-            this._dbSet = context.Set<T>();
+            _context = context;
+            _dbSet = context.Set<T>();
         }
 
-     
+
 
         public T Add(T entity)
         {
@@ -82,9 +81,10 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
         {
             try
             {
-                foreach (var item in entities.Where(en => _context.Entry(en).State == EntityState.Detached))
+                var enumerable = entities.ToList();
+                foreach (var item in enumerable.Where(en => _context.Entry(en).State == EntityState.Detached))
                     _dbSet.Attach(item);
-                _dbSet.RemoveRange(entities);
+                _dbSet.RemoveRange(enumerable);
             }
             catch (Exception)
             {
@@ -106,7 +106,8 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
 
         public IQueryable<T> UpdateRange(IEnumerable<T> entities)
         {
-            foreach (var entity in entities)
+            var enumerable = entities.ToList();
+            foreach (var entity in enumerable)
             {
                 if (_context.Entry(entity).State == EntityState.Detached)
                 {
@@ -114,15 +115,13 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 }
                 _context.Entry(entity).State = EntityState.Modified;
             }
-            return entities.AsQueryable();
+            return enumerable.AsQueryable();
         }
 
         private static IQueryable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query, int? skip = null, int? take = null)
         {
             if (filterPredicate != null)
-            {
                 query = query.Where(filterPredicate);
-            }
 
             if (tablePredicate != null)
             {
@@ -134,12 +133,9 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                     includeString = includeString.EndsWith(".") ? includeString.Remove(includeString.Length - 1, 1) : includeString;
 
                     if (string.IsNullOrWhiteSpace(includeString) == false)
-                        query = (IQueryable<T>)query.Include(includeString);
+                        query = query.Include(includeString);
                 }
             }
-
-            try
-            {
                 var invoked = orderbyPredicate != null ? orderbyPredicate.Invoke(query) : query;
                 IQueryable<T> result = invoked;
                 if (skip.HasValue)
@@ -147,13 +143,6 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 if (take.HasValue)
                     result = result.Take(take.Value);
                 return result.AsQueryable();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
         }
         public T Get(int id, bool enableTracking = true, params Expression<Func<T, object>>[] tablePredicate)
         {
@@ -168,7 +157,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 {
                     dynamic body = item.Body;
                     string includeString = GetPropertyMap(body);
-                    query = (IQueryable<T>)query.Include(includeString);
+                    query = query.Include(includeString);
                 }
             }
             return query.Where(lambda).SingleOrDefault();
@@ -176,8 +165,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
 
         public T Get(Expression<Func<T, bool>> filterPredicate, bool enableTracking = true, params Expression<Func<T, object>>[] tablePredicate)
         {
-            IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking(); ;
-            var param = Expression.Parameter(typeof(T));
+            IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking(); 
             var lambda = filterPredicate;
             if (tablePredicate != null)
             {
@@ -185,8 +173,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                 {
                     dynamic body = item.Body;
                     string includeString = GetPropertyMap(body);
-                    query = (IQueryable<T>)query.Include(includeString);
-
+                    query = query.Include(includeString);
                 }
             }
             return query.Where(lambda).SingleOrDefault();
@@ -218,7 +205,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             }
             else if (Helpers.IsPropertyExist(body, "Member"))
             {
-                includeString += body.Member.Name;
+                includeString += body.ToString().Substring(body.ToString().IndexOf(".") + 1);
             }
             return includeString;
         }

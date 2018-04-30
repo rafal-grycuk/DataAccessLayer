@@ -12,13 +12,14 @@ namespace DataAccessLayer.Core.Tests.Tests
         private IRepository<Product> productRepo;
         private IRepository<Order> orderRepo;
         private IRepository<Client> clientRepo;
-
+        private IRepository<Address> addresses;
         public RepositoryReadTests()
         {
             var context = new TestDbContext();
             productRepo = new EntityFrameworkRepository<Product>(context);
             orderRepo = new EntityFrameworkRepository<Order>(context);
             clientRepo = new EntityFrameworkRepository<Client>(context);
+            addresses = new EntityFrameworkRepository<Address>(context);
             Seed.SeedData(context);
         }
 
@@ -35,7 +36,7 @@ namespace DataAccessLayer.Core.Tests.Tests
 
             var client = clientRepo.Get(x => x.Id == 1, false,
                 c => c.Orders.Select(x => x.Products.Select(pr => pr.Producer)));
-            Assert.True(client != null);
+            Assert.True(client != null && client.Orders != null);
         }
 
         [Fact]
@@ -53,7 +54,14 @@ namespace DataAccessLayer.Core.Tests.Tests
         public void GetProductRangeTest()
         {
             var products = productRepo.GetRange(enableTracking: false, tablePredicate: p => p.Order);
-          
+            Assert.True(products.FirstOrDefault().Order != null);
+        }
+
+        [Fact]
+        public void GetProductsWithProducerAndAddress()
+        {
+            var product = productRepo.Get(1, enableTracking: false, tablePredicate: new System.Linq.Expressions.Expression<System.Func<Product, object>>[] { p => p.Order, p => p.Producer.Address});
+            Assert.True(product.Producer.Address != null);
         }
 
     }

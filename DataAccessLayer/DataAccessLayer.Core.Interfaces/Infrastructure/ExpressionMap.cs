@@ -9,13 +9,10 @@ namespace DataAccessLayer.Core.Interfaces.Infrastructure
 
         public Expression<Func<T, object>>[] ThenIncludeExpression { get; set; }
 
-    //    public IncludeType IncludeType { get; }
-
-
         public ExpressionMap(Expression<Func<T, object>> includeExpression, params Expression<Func<T, object>>[] thenIncludeExpression)
         {
-            this.IncludeExpression = includeExpression;
-            this.ThenIncludeExpression = thenIncludeExpression;
+            IncludeExpression = includeExpression;
+            ThenIncludeExpression = thenIncludeExpression;
         }
 
 

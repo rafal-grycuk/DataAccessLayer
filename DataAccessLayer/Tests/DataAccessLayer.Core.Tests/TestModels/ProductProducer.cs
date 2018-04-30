@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,7 +14,9 @@ namespace DataAccessLayer.Core.Tests.TestModels
 
         public string Name { get; set; }
 
-        public string Address{ get; set; }
+        public Address Address{ get; set; }
+        [ForeignKey("Address")]
+        public int AddressId { get; set; }
 
     }
 }

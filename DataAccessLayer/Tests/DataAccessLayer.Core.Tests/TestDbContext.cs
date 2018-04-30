@@ -11,8 +11,7 @@ namespace DataAccessLayer.Core.Tests
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.
-                UseInMemoryDatabase();
+            optionsBuilder.UseInMemoryDatabase();
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -26,5 +25,7 @@ namespace DataAccessLayer.Core.Tests
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<ProductProducer> ProductProducers { get; set; }
+
+        public DbSet<Address> Addresses { get; set; }
     }
 }

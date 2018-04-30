@@ -44,8 +44,7 @@ namespace DataAccessLayer.Core.EntityFramework.UoW
                 while (innerEx?.InnerException != null)
                     innerEx = innerEx.InnerException;
 
-                SqlException ex = innerEx as SqlException;
-                if (ex != null)
+                if (innerEx is SqlException ex)
                 {
                     var sqlEx = ex;
                     switch (sqlEx.Errors[0].Number)
@@ -57,7 +56,7 @@ namespace DataAccessLayer.Core.EntityFramework.UoW
                         case 2627:
                             throw new UniqueKeyViolationException(sqlEx.Errors[0].Message);
                         default:
-                            throw new Exception(sqlEx.Message.ToString());
+                            throw new Exception(sqlEx.Message);
                     }
                 }
                 else
@@ -69,10 +68,11 @@ namespace DataAccessLayer.Core.EntityFramework.UoW
                                                 .Entries<IValidatableObject>()
                                                 .SelectMany(e => e.Entity.Validate(null))
                                                 .Where(r => r != ValidationResult.Success);
-                if (validationErrors.Any())
+                var validationResults = validationErrors.ToList();
+                if (validationResults.Any())
                 {
                     var sb = new StringBuilder();
-                    foreach (var entry in validationErrors)
+                    foreach (var entry in validationResults)
                     {
                         foreach (var member in entry.MemberNames)
                         {

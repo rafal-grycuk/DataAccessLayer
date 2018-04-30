@@ -10,9 +10,18 @@ namespace DataAccessLayer.Core.Tests
     {
         public static void SeedData(TestDbContext context)
         {
+            Address prodAddress = new Address()
+            {
+                ApartmentNumber = 4,
+                BuildingNumber = 2,
+                City = "NYC",
+                Country = "USA",
+                Street = "Manhattan"
+            };
+            context.Addresses.Add(prodAddress);
             ProductProducer producer = new ProductProducer()
             {
-                Address ="4 steet NYC",
+                Address = prodAddress,
                 Name = "Volvo"
             };
 
@@ -22,11 +31,12 @@ namespace DataAccessLayer.Core.Tests
             {
                 Price = 2.2m,
                 ProducerId = producer.Id,
-                Type= "Car"
+                Type = "Car",
+               // Id = 1
             };
 
             context.Products.Add(product);
-            
+
             Order order = new Order()
             {
                 Products = new List<Product>(),

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using DataAccessLayer.Core.Interfaces.Infrastructure;
 
 namespace DataAccessLayer.Core.Interfaces.Repositories
 {
