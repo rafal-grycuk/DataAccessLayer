@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace DataAccessLayer.Net.Interfaces.Repositories
 {
@@ -11,6 +13,8 @@ namespace DataAccessLayer.Net.Interfaces.Repositories
         bool DeleteAll();
 
         T Add(T entity);
+
+        T AddOrUpdate(Expression<Func<T, object>> predicate, T entity);
 
         void AddRange(IEnumerable<T> entities);
 

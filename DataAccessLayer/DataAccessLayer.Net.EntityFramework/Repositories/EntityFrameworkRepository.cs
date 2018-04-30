@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using DataAccessLayer.Net.Interfaces.Repositories;
@@ -14,13 +15,19 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
 
         public EntityFrameworkRepository(DbContext context)
         {
-            this._context = context;
-            this._dbSet = context.Set<T>();
+            _context = context;
+            _dbSet = context.Set<T>();
         }
 
         public T Add(T entity)
         {
             return _dbSet.Add(entity);
+        }
+
+        public T AddOrUpdate(Expression<Func<T, object>> predicate, T entity)
+        {
+            _context.Set<T>().AddOrUpdate(predicate, entity);
+            return entity;
         }
 
         public void AddRange(IEnumerable<T> entities)
@@ -59,9 +66,10 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
         {
             try
             {
-                foreach (var item in entities.Where(en => _context.Entry(en).State == EntityState.Detached))
+                var enumerable = entities.ToList();
+                foreach (var item in enumerable.Where(en => _context.Entry(en).State == EntityState.Detached))
                     _dbSet.Attach(item);
-                _dbSet.RemoveRange(entities);
+                _dbSet.RemoveRange(enumerable);
             }
             catch (Exception)
             {
@@ -83,7 +91,8 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
 
         public IEnumerable<T> UpdateRange(IEnumerable<T> entities)
         {
-            foreach (var entity in entities)
+            var updateRangeList = entities.ToList();
+            foreach (var entity in updateRangeList)
             {
                 if (_context.Entry(entity).State == EntityState.Detached)
                 {
@@ -91,10 +100,10 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
                 }
                 _context.Entry(entity).State = EntityState.Modified;
             }
-            return entities;
+            return updateRangeList;
         }
 
-        private static IEnumerable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query, int? skip = null, int? take = null)
+        private static IQueryable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query, int? skip = null, int? take = null)
         {
             if (filterPredicate != null)
             {
@@ -105,26 +114,16 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
             {
                 foreach (var inc in tablePredicate)
                 {
-                    query = (IQueryable<T>)query.Include(inc);
+                    query = query.Include(inc);
                 }
             }
-
-            try
-            {
-                var invoked = orderbyPredicate != null ? orderbyPredicate.Invoke(query) : query;
-                IQueryable<T> result = invoked;
-                if (skip.HasValue)
-                    result = result.Skip(skip.Value);
-                if (take.HasValue)
-                    result = result.Take(take.Value);
-                return result.ToList();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-
+            var invoked = orderbyPredicate != null ? orderbyPredicate.Invoke(query) : query;
+            IQueryable<T> result = invoked;
+            if (skip.HasValue)
+                result = result.Skip(skip.Value);
+            if (take.HasValue)
+                result = result.Take(take.Value);
+            return result;
         }
         public T Get(int id, bool enableTracking = true, params Expression<Func<T, object>>[] tablePredicate)
         {
@@ -136,7 +135,7 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
             if (tablePredicate != null)
             {
                 foreach (var item in tablePredicate)
-                    query = (IQueryable<T>)query.Include(item);
+                    query = query.Include(item);
             }
             return query.Where(lambda).SingleOrDefault();
         }
@@ -149,12 +148,12 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
             if (tablePredicate != null)
             {
                 foreach (var item in tablePredicate)
-                    query = (IQueryable<T>)query.Include(item);
+                    query = query.Include(item);
             }
             return query.Where(lambda).SingleOrDefault();
         }
 
-        public IEnumerable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
+        public IQueryable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
         {
             IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking();
             return GetRangePrivate(filterPredicate, orderByPredicate, tablePredicate, query, skip, take);

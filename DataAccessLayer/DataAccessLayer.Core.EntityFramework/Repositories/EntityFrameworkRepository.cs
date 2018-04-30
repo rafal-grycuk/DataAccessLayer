@@ -19,9 +19,6 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             _context = context;
             _dbSet = context.Set<T>();
         }
-
-
-
         public T Add(T entity)
         {
             return _dbSet.Add(entity).Entity;
