@@ -142,8 +142,7 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
 
         public T Get(Expression<Func<T, bool>> filterPredicate, bool enableTracking = true, params Expression<Func<T, object>>[] tablePredicate)
         {
-            IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking(); ;
-            var param = Expression.Parameter(typeof(T));
+            IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking(); 
             var lambda = filterPredicate;
             if (tablePredicate != null)
             {
