@@ -21,6 +21,6 @@ namespace DataAccessLayer.Core.Interfaces.Repositories
 
         T Update(T entity);
 
-        IQueryable<T> UpdateRange(IEnumerable<T> entities);
+        IEnumerable<T> UpdateRange(IEnumerable<T> entities);
     }
 }

@@ -102,29 +102,6 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
             }
             return updateRangeList;
         }
-
-        private static IQueryable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query, int? skip = null, int? take = null)
-        {
-            if (filterPredicate != null)
-            {
-                query = query.Where(filterPredicate);
-            }
-
-            if (tablePredicate != null)
-            {
-                foreach (var inc in tablePredicate)
-                {
-                    query = query.Include(inc);
-                }
-            }
-            var invoked = orderbyPredicate != null ? orderbyPredicate.Invoke(query) : query;
-            IQueryable<T> result = invoked;
-            if (skip.HasValue)
-                result = result.Skip(skip.Value);
-            if (take.HasValue)
-                result = result.Take(take.Value);
-            return result;
-        }
         public T Get(int id, bool enableTracking = true, params Expression<Func<T, object>>[] tablePredicate)
         {
             IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking();
@@ -152,10 +129,28 @@ namespace DataAccessLayer.Net.EntityFramework.Repositories
             return query.Where(lambda).SingleOrDefault();
         }
 
-        public IQueryable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
+        public IEnumerable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
         {
             IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking();
-            return GetRangePrivate(filterPredicate, orderByPredicate, tablePredicate, query, skip, take);
+            if (filterPredicate != null)
+            {
+                query = query.Where(filterPredicate);
+            }
+
+            if (tablePredicate != null)
+            {
+                foreach (var inc in tablePredicate)
+                {
+                    query = query.Include(inc);
+                }
+            }
+            var invoked = orderByPredicate != null ? orderByPredicate.Invoke(query) : query;
+            IQueryable<T> result = invoked;
+            if (skip.HasValue)
+                result = result.Skip(skip.Value);
+            if (take.HasValue)
+                result = result.Take(take.Value);
+            return result;
         }
 
     }

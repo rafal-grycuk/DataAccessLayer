@@ -101,7 +101,7 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             return dbEntityEntry.Entity;
         }
 
-        public IQueryable<T> UpdateRange(IEnumerable<T> entities)
+        public IEnumerable<T> UpdateRange(IEnumerable<T> entities)
         {
             var enumerable = entities.ToList();
             foreach (var entity in enumerable)
@@ -115,32 +115,6 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             return enumerable.AsQueryable();
         }
 
-        private static IQueryable<T> GetRangePrivate(Expression<Func<T, bool>> filterPredicate, Func<IQueryable<T>, IOrderedQueryable<T>> orderbyPredicate, Expression<Func<T, object>>[] tablePredicate, IQueryable<T> query, int? skip = null, int? take = null)
-        {
-            if (filterPredicate != null)
-                query = query.Where(filterPredicate);
-
-            if (tablePredicate != null)
-            {
-                foreach (var inc in tablePredicate)
-                {
-                    dynamic body = inc.Body;
-                    string includeString = GetPropertyMap(body);
-                    includeString = includeString.StartsWith(".") ? includeString.Remove(0, 1) : includeString;
-                    includeString = includeString.EndsWith(".") ? includeString.Remove(includeString.Length - 1, 1) : includeString;
-
-                    if (string.IsNullOrWhiteSpace(includeString) == false)
-                        query = query.Include(includeString);
-                }
-            }
-                var invoked = orderbyPredicate != null ? orderbyPredicate.Invoke(query) : query;
-                IQueryable<T> result = invoked;
-                if (skip.HasValue)
-                    result = result.Skip(skip.Value);
-                if (take.HasValue)
-                    result = result.Take(take.Value);
-                return result.AsQueryable();
-        }
         public T Get(int id, bool enableTracking = true, params Expression<Func<T, object>>[] tablePredicate)
         {
             IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking();
@@ -181,7 +155,6 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             string includeString = "";
             if (Helpers.IsPropertyExist(body, "Arguments"))
             {
-
                 dynamic arguments = body.Arguments;
                 foreach (dynamic arg in arguments)
                 {
@@ -198,7 +171,6 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
                         includeString += "." + GetPropertyMap(arg.Body);
                     }
                 }
-
             }
             else if (Helpers.IsPropertyExist(body, "Member"))
             {
@@ -207,11 +179,32 @@ namespace DataAccessLayer.Core.EntityFramework.Repositories
             return includeString;
         }
 
-        public IQueryable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
+        public IEnumerable<T> GetRange(Expression<Func<T, bool>> filterPredicate = null, bool enableTracking = true, Func<IQueryable<T>, IOrderedQueryable<T>> orderByPredicate = null, int? skip = null, int? take = null, params Expression<Func<T, object>>[] tablePredicate)
         {
             IQueryable<T> query = enableTracking ? _dbSet : _dbSet.AsNoTracking();
-            return GetRangePrivate(filterPredicate, orderByPredicate, tablePredicate, query, skip, take);
-        }
+            if (filterPredicate != null)
+                query = query.Where(filterPredicate);
 
+            if (tablePredicate != null)
+            {
+                foreach (var inc in tablePredicate)
+                {
+                    dynamic body = inc.Body;
+                    string includeString = GetPropertyMap(body);
+                    includeString = includeString.StartsWith(".") ? includeString.Remove(0, 1) : includeString;
+                    includeString = includeString.EndsWith(".") ? includeString.Remove(includeString.Length - 1, 1) : includeString;
+
+                    if (string.IsNullOrWhiteSpace(includeString) == false)
+                        query = query.Include(includeString);
+                }
+            }
+            var invoked = orderByPredicate != null ? orderByPredicate.Invoke(query) : query;
+            IQueryable<T> result = invoked;
+            if (skip.HasValue)
+                result = result.Skip(skip.Value);
+            if (take.HasValue)
+                result = result.Take(take.Value);
+            return result.AsQueryable();
+        }
     }
 }
